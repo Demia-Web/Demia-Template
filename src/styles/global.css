@@ -1,1 +1,15 @@
+@layer theme, base, components, utilities;
 @import "tailwindcss";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --color-azzurro: #3dbcc8;
+}
+
+body,
+html {
+  font-family: "Lato", serif;
+  overflow-x: hidden;
+}
