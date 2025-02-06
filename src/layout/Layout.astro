@@ -1,0 +1,36 @@
+---
+import BaseHead from "../includes/BaseHead.astro";
+import Header from "../includes/Header.astro";
+import Footer from "../includes/Footer.astro";
+import Menu from "../includes/Menu.astro";
+import { ClientRouter } from "astro:transitions";
+
+const { title, description } = Astro.props;
+
+import "./src/styles/global.css";
+---
+
+<!doctype html>
+<html lang="it" id="html">
+  <head>
+    <BaseHead title={title} description={description} />
+    <ClientRouter />
+  </head>
+  <body id="body">
+    <Header />
+    <Menu />
+    <slot />
+    <Footer />
+    <script is:inline>
+      let isNavigationTriggered = false;
+
+      document.addEventListener("astro:page-load", () => {
+        if (isNavigationTriggered) {
+          window.location.reload(true);
+        } else {
+          isNavigationTriggered = true;
+        }
+      });
+    </script>
+  </body>
+</html>
