@@ -1,6 +1,6 @@
 ---
 import "../css/style.css";
-const { title, description } = Astro.props;
+const { title, description, keyword } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
@@ -10,6 +10,8 @@ const { title, description } = Astro.props;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="keywords" content={keyword} />
+<meta name="author" content="Demia" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
