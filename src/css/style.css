@@ -13,3 +13,17 @@ html {
   font-family: "Lato", serif;
   overflow-x: hidden;
 }
+
+/* Font */
+
+/* Spacing */
+
+.px-body {
+  padding-left: 2.5vw; /* 36px */
+  padding-right: 2.5vw; /* 36px */
+}
+
+.py-body {
+  padding-top: 13.889vw; /* 200px */
+  padding-bottom: 13.889vw; /* 200px */
+}
