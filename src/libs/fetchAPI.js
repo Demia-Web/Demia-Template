@@ -1,6 +1,6 @@
 const cache = new Map();
 const DEBUG = false;
-const STATS = false;
+const STATS = true;
 
 let totalCalls = 0;
 let cacheHits = 0;
