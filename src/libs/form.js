@@ -3,14 +3,12 @@ if (!DEBUG) console.log = () => {};
 
 document.getElementById("contactForm").addEventListener("submit", async function (e) {
   e.preventDefault();
-  console.log("Form submit triggered");
 
-  const loader = document.getElementById("formLoader");
-  loader.classList.remove("hidden");
-  loader.classList.add("fixed");
+  // const loader = document.getElementById("formLoader");
+  // loader.classList.remove("hidden");
+  // loader.classList.add("fixed");
 
   const formData = new FormData(this);
-  console.log("FormData entries:", Object.fromEntries(formData.entries()));
 
   const honeypotFields = ["nome_alternativo", "sito_web", "email_secondaria", "telefono_cellulare"];
   const isBot = honeypotFields.some((field) => {
@@ -32,24 +30,6 @@ document.getElementById("contactForm").addEventListener("submit", async function
     cliente: "LUCAR",
   };
 
-  // Aggiungi i campi solo se sono popolati
-  const modelloAuto = formData.get("modello_auto");
-  if (modelloAuto && modelloAuto.trim() !== "") {
-    postDataEmail.modello_auto = modelloAuto;
-  }
-
-  const promo = formData.get("richiestaPromo");
-  if (promo && promo.trim() !== "") {
-    postDataEmail.promo = promo;
-  }
-
-  const car_plate = formData.get("car_plate");
-  if (car_plate && car_plate.trim() !== "") {
-    postDataEmail.car_plate = car_plate;
-  }
-
-  console.log("postDataEmail:", postDataEmail);
-
   try {
     console.log("Sending request to:", import.meta.env.PUBLIC_SMTP_URL);
     const response = await fetch("/.netlify/functions/proxy", {
@@ -60,7 +40,6 @@ document.getElementById("contactForm").addEventListener("submit", async function
         requestBody: postDataEmail,
       }),
     });
-    console.log("Response status:", response.status);
     setTimeout(() => {
       if (DEBUG) console.log("[Redirect] Reindirizzamento alla pagina di ringraziamento");
       window.location.href = "/ThanksYouPage";
