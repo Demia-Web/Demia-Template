@@ -1,5 +1,28 @@
-<header class="fixed w-full top-0 flex flex-row justify-between z-10 p-[5.208vw]" id="header">
-  <img src="/pages/home/demia.svg" alt="" class="w-[14.583vw]" />
+---
+import GlassSurface from "../components/GlassSurface";
+---
+
+<header class="p-[5.208vw] fixed top-0 z-20 w-full" id="">
+  <GlassSurface
+    borderRadius={20}
+    borderWidth={0.07}
+    displace={5}
+    backgroundOpacity={0}
+    blur={18}
+    distortionScale={-144}
+    brightness={69}
+    redOffset={0}
+    greenOffset={11}
+    blueOffset={22}
+    mixBlendMode="difference"
+    client:only="react"
+    className={`!w-full !h-fit`}
+  >
+    <div class="p-[1.667vw] flex flex-row justify-between items-center w-full">
+      <img src="/pages/home/demia.svg" alt="" class="w-auto h-[1.831vw]" />
+      <p class="text-white">Menu</p>
+    </div>
+  </GlassSurface>
 </header>
 
 <script src="../libs/header.js"></script>
