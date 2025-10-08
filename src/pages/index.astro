@@ -1,4 +1,5 @@
 ---
+import { AuroraText } from "../components/ui/aurora-text";
 import Layout from "../layout/Layout.astro";
 ---
 
@@ -8,7 +9,10 @@ import Layout from "../layout/Layout.astro";
     <div class="bg-gradient-to-r from-black to-black/0 opacity-50 absolute z-[1] w-full h-full top-0"></div>
     <div class="absolute top-0 w-full h-full flex flex-col justify-end z-[2] p-[5.208vw]">
       <div class="flex flex-col gap-[1.25vw]">
-        <h1 class="text-white font-bold">Demia Starter kit</h1>
+        <h1 class="text-white font-bold">
+          <AuroraText client:load> Demia </AuroraText>
+          Starter kit
+        </h1>
         <h2 class="text-white font-normal">UI/UX Sito Web</h2>
       </div>
     </div>
