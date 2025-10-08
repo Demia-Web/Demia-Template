@@ -49,18 +49,19 @@
 body,
 html {
   overflow-x: hidden;
+  font-family: Montserrat;
 }
 
 h1,
 .t-h1 {
-  font-size: 123px;
+  font-size: 120px;
   line-height: 123px;
 }
 
 h2,
 .t-h2 {
-  font-size: 123px;
-  line-height: 123px;
+  font-size: 44px;
+  line-height: 48px;
 }
 
 h3,
