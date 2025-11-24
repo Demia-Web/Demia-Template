@@ -12,25 +12,33 @@
   --color-azzurro: #3dbcc8;
 
   /* Misure */
-  --spacing-xxl: clamp(150px, 13.889vw, 19.531vh); /* 200px */
-  --spacing-xl: clamp(100px, 10.417vw, 14.648vh); /* 150px */
-  --spacing-l: clamp(44px, 5.556vw, 7.813vh); /* 80px */
-  --spacing-m: clamp(32px, 3.056vw, 4.297vh); /* 44px */
-  --spacing-s: clamp(24px, 2.222vw, 3.125vh); /* 32px */
-  --spacing-xs: clamp(16px, 1.667vw, 2.344vh); /* 24px */
-  --spacing-xxs: clamp(12px, 1.111vw, 1.563vh); /* 16px */
-  --spacing-xxs: clamp(12px, 1.111vw, 1.563vh); /* 16px */
+  --spacing-xxxl: clamp(100px, 13.021vw, 23.148vh); /* 250px */
+  --spacing-xxl: clamp(100px, 7.813vw, 13.889vh); /* 150px */
+  --spacing-xl: clamp(44px, 4.167vw, 7.407vh); /* 80px */
+  --spacing-l: clamp(24px, 2.292vw, 4.074vh); /* 44px */
+  --spacing-m: clamp(16px, 1.667vw, 2.963vh); /* 32px */
+  --spacing-s: clamp(16px, 1.25vw, 2.222vh); /* 24px */
+  --spacing-xs: clamp(12px, 0.833vw, 1.481vh); /* 16px */
+  --spacing-xxs: clamp(8px, 0.417vw, 0.741vh); /* 8px */
+  --spacing-xxxs: clamp(4px, 0.208vw, 0.37vh); /* 4px */
 
-  --spacing-gutter: clamp(10px, 0.694vw, 0.977vh); /* 10px */
-  --spacing-body: clamp(16px, 2.5vw, 3.516vh); /* 36px */
-  --spacing-hero: clamp(100dvh, 71.111vw, 100vh); /* 100vh */
+  --spacing-gutter: clamp(10px, 0.521vw, 0.926vh); /* 10px */
+  --spacing-body: clamp(16px, 1.875vw, 3.333vh); /* 36px */
+  --spacing-hero: clamp(100vh, 100vw, 100vh); /* 100vh */
 
   /* Taglie immagini */
-  --img-xl: clamp(580px, 55.556vw, 78.125vh);
-  --img-l: clamp(420px, 40.278vw, 56.641vh);
-  --img-m: clamp(320px, 29.167vw, 41.016vh);
-  --img-s: clamp(240px, 23.611vw, 33.203vh);
-  --img-xs: clamp(240px, 16.667vw, 23.438vh);
+  --img-xxl: clamp(420px, 41.667vw, 74.074vh); /* 800px */
+  --spacing-img-xxl: clamp(420px, 41.667vw, 74.074vh); /* 800px */
+  --img-xl: clamp(420px, 35.417vw, 62.963vh); /* 680px */
+  --spacing-img-xl: clamp(420px, 35.417vw, 62.963vh); /* 680px */
+  --img-l: clamp(420px, 30.208vw, 53.704vh); /* 580px */
+  --spacing-img-l: clamp(420px, 30.208vw, 53.704vh); /* 580px */
+  --img-m: clamp(320px, 21.875vw, 38.889vh); /* 420px */
+  --spacing-img-m: clamp(320px, 21.875vw, 38.889vh); /* 420px */
+  --img-s: clamp(240px, 17.708vw, 31.481vh); /* 340px */
+  --spacing-img-s: clamp(240px, 17.708vw, 31.481vh); /* 340px */
+  --img-xs: clamp(240px, 12.5vw, 22.222vh); /* 240px */
+  --spacing-img-xs: clamp(240px, 12.5vw, 22.222vh); /* 240px */
 }
 
 @utility img-xxl {
@@ -55,52 +63,57 @@ html {
   font-family: Montserrat;
 }
 
-h1,
-.t-h1 {
-  font-size: 120px;
-  line-height: 123px;
+html[data-theme="white"] {
+  background-color: var(--color-bianco);
 }
 
-h2,
-.t-h2 {
-  font-size: 44px;
-  line-height: 48px;
-}
+@layer utilities {
+  .highlight {
+    font-size: clamp(64px, 9.375vw, 16.667vh);
+    line-height: clamp(64px, 9.375vw, 16.667vh);
+  }
 
-h3,
-.t-h3 {
-  font-size: 123px;
-  line-height: 123px;
-}
+  .t-h1 {
+    font-size: clamp(44px, 5.208vw, 9.259vh);
+    line-height: clamp(48px, 5.417vw, 9.63vh);
+  }
 
-h4,
-.t-h4 {
-  font-size: 123px;
-  line-height: 123px;
-}
+  .t-h2 {
+    font-size: clamp(36px, 4.063vw, 7.222vh);
+    line-height: clamp(40px, 4.271vw, 7.593vh);
+  }
 
-h5,
-.t-h5 {
-  font-size: 123px;
-  line-height: 123px;
-}
+  .t-h3 {
+    font-size: clamp(24px, 2.5vw, 4.444vh);
+    line-height: clamp(28px, 2.708vw, 4.815vh);
+  }
 
-p.big,
-.t-p-big {
-  font-size: 123px;
-  line-height: 123px;
-}
+  .t-h4 {
+    font-size: clamp(20px, 1.875vw, 3.333vh);
+    line-height: clamp(24px, 2.083vw, 3.704vh);
+  }
 
-p,
-.t-p {
-  font-size: 0.833vw;
-  line-height: 1.042vw;
-}
+  .t-h5 {
+    font-size: clamp(20px, 1.25vw, 2.222vh);
+    line-height: clamp(24px, 1.458vw, 2.593vh);
+  }
 
-p.small,
-.t-p-small {
-  font-size: 123px;
-  line-height: 123px;
+  p,
+  .t-p {
+    font-size: clamp(16px, 0.833vw, 1.481vh);
+    line-height: clamp(20px, 1.042vw, 1.852vh);
+  }
+
+  .t-label {
+    font-size: clamp(20px, 1.042vw, 1.852vh);
+    line-height: clamp(20px, 1.042vw, 1.852vh);
+    letter-spacing: -0.3px;
+  }
+
+  .t-small {
+    font-size: clamp(12px, 0.625vw, 1.111vh);
+    line-height: clamp(16px, 0.833vw, 1.481vh);
+  }
 }
 
 @theme inline {
