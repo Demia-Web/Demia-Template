@@ -1,50 +1,40 @@
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-document.addEventListener("astro:page-load", () => {
-  const header = document.querySelector(".header");
+gsap.registerPlugin(ScrollTrigger);
 
-  // --- NAVBAR SHOW/HIDE ALLO SCROLL (desktop con GSAP) ---
-  let lastScrollTop = 0;
-  let isScrolling = false;
+export function initHeader() {
+  if (window.swupDebug) console.log("🔄 initHeader()");
   const navbar = document.getElementById("header");
-  if (navbar) gsap.set(navbar, { y: 0 });
+  if (!navbar) return;
 
-  const onScrollDesktop = () => {
-    if (isScrolling) return;
-    isScrolling = true;
+  if (window.swupDebug) console.log("✅ initHeader() caricata");
 
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const navbarHeight = navbar ? navbar.offsetHeight : 0;
-    const direction = scrollTop > lastScrollTop ? 1 : -1;
+  // HEADER HIDE ALLO SCROLL
+  if (document.querySelector("#header")) {
+    let lastScrollTop = 0;
+    let isScrolling = false;
 
-    if (scrollTop <= 1) {
-      gsap.to(navbar, { y: 0, duration: 0.6, ease: "power4.out" });
-    } else if (direction === 1 && scrollTop > navbarHeight + 50) {
-      // scroll down → nascondi navbar
-      gsap.to(navbar, { y: -navbarHeight, duration: 0.8, ease: "power4.out" });
-    } else if (direction === -1) {
-      // scroll up → mostra navbar con ombra (white)
-      gsap.to(navbar, { y: 0, duration: 0.8, ease: "power4.out" });
-    }
+    const onScroll = () => {
+      if (isScrolling) return;
+      isScrolling = true;
 
-    lastScrollTop = scrollTop;
-    setTimeout(() => {
-      isScrolling = false;
-    }, 100);
-  };
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const navbarHeight = navbar.offsetHeight;
+      const direction = scrollTop > lastScrollTop ? 1 : -1;
 
-  const mqlDesktop = window.matchMedia("(min-width: 1024px)");
-  let scrollHandlerAttached = false;
-  function attachScrollIfDesktop() {
-    if (mqlDesktop.matches && !scrollHandlerAttached) {
-      window.addEventListener("scroll", onScrollDesktop, { passive: true });
-      scrollHandlerAttached = true;
-    } else if (!mqlDesktop.matches && scrollHandlerAttached) {
-      window.removeEventListener("scroll", onScrollDesktop);
-      scrollHandlerAttached = false;
-      if (navbar) gsap.to(navbar, { y: 0, duration: 0.3 });
-    }
+      if (scrollTop <= 1) {
+        gsap.to(navbar, { y: 0, duration: 0.6, ease: "power4.out" });
+      } else if (direction === 1 && scrollTop > navbarHeight + 50) {
+        gsap.to(navbar, { y: -navbarHeight - 50, duration: 0.8, ease: "power4.out" });
+      } else if (direction === -1) {
+        gsap.to(navbar, { y: 0, duration: 0.8, ease: "power4.out" });
+      }
+
+      lastScrollTop = scrollTop;
+      setTimeout(() => (isScrolling = false), 100);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
   }
-  attachScrollIfDesktop();
-  mqlDesktop.addEventListener("change", attachScrollIfDesktop);
-});
+}

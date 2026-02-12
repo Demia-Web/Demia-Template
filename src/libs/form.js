@@ -1,53 +1,97 @@
 const DEBUG = false;
 if (!DEBUG) console.log = () => {};
 
-document.getElementById("contactForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+export function initForm() {
+  if (window.swupDebug) console.log("🔄 initForm()");
+  const navbar = document.getElementById("contactForm");
+  if (!navbar) return;
 
-  // const loader = document.getElementById("formLoader");
-  // loader.classList.remove("hidden");
-  // loader.classList.add("fixed");
+  if (window.swupDebug) console.log("✅ initForm() caricata");
 
-  const formData = new FormData(this);
+  // Gestione privacy
+  if (document.querySelector("#privacy-row")) {
+    const row = document.getElementById("privacy-row");
+    const checkbox = document.getElementById("privacy-checkbox");
+    const dot = document.getElementById("privacy-dot");
+    if (!row || !checkbox || !dot) return;
 
-  const honeypotFields = ["nome_alternativo", "sito_web", "email_secondaria", "telefono_cellulare"];
-  const isBot = honeypotFields.some((field) => {
-    const value = formData.get(field);
-    return typeof value === "string" && value.trim() !== "";
-  });
-  console.log("isBot:", isBot);
-  if (isBot) return;
+    row.addEventListener("click", (e) => {
+      // Prevent double toggling if user clicks directly on checkbox
+      if (e.target === checkbox) return;
+      checkbox.checked = !checkbox.checked;
 
-  const postDataEmail = {
-    name: formData.get("name"),
-    surname: formData.get("surname"),
-    phone: formData.get("phone"),
-    email: formData.get("email"),
-    cap: formData.get("cap"),
-    message: formData.get("message"),
-    richiesta: formData.get("richiesta"),
-    privacyConsent: formData.get("privacyConsent") === "on",
-    cliente: "LUCAR",
-  };
-
-  try {
-    console.log("Sending request to:", import.meta.env.PUBLIC_SMTP_URL);
-    const response = await fetch("/.netlify/functions/proxy", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        apiUrl: `${import.meta.env.PUBLIC_SMTP_URL}`,
-        requestBody: postDataEmail,
-      }),
+      if (checkbox.checked) {
+        dot.classList.add("bg-nero");
+        dot.classList.remove("border-nero");
+      } else {
+        dot.classList.remove("bg-nero");
+        dot.classList.add("border-nero");
+      }
     });
-    setTimeout(() => {
-      if (DEBUG) console.log("[Redirect] Reindirizzamento alla pagina di ringraziamento");
-      window.location.href = "/ThanksYouPage";
-    }, 2000);
-  } catch (error) {
-    console.log("Errore nel invio del form:", error);
-    alert("Errore nel processo. Riprova più tardi.");
-    loader.classList.remove("fixed");
-    loader.classList.add("hidden");
+
+    // Keep dot synced if checkbox is toggled via keyboard
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        dot.classList.add("bg-nero");
+        dot.classList.remove("border-nero");
+      } else {
+        dot.classList.remove("bg-nero");
+        dot.classList.add("border-nero");
+      }
+    });
   }
-});
+
+  // Gestione invio form
+  if (document.querySelector("#contactForm")) {
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      // const loader = document.getElementById("formLoader");
+      // loader.classList.remove("hidden");
+      // loader.classList.add("fixed");
+
+      const formData = new FormData(this);
+
+      const honeypotFields = ["nome_alternativo", "sito_web", "email_secondaria", "telefono_cellulare"];
+      const isBot = honeypotFields.some((field) => {
+        const value = formData.get(field);
+        return typeof value === "string" && value.trim() !== "";
+      });
+      console.log("isBot:", isBot);
+      if (isBot) return;
+
+      const postDataEmail = {
+        name: formData.get("name"),
+        surname: formData.get("surname"),
+        phone: formData.get("phone"),
+        email: formData.get("email"),
+        cap: formData.get("cap"),
+        message: formData.get("message"),
+        richiesta: formData.get("richiesta"),
+        privacyConsent: formData.get("privacyConsent") === "on",
+        cliente: "LUCAR",
+      };
+
+      try {
+        console.log("Sending request to:", import.meta.env.PUBLIC_SMTP_URL);
+        const response = await fetch("/.netlify/functions/proxy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            apiUrl: `${import.meta.env.PUBLIC_SMTP_URL}`,
+            requestBody: postDataEmail,
+          }),
+        });
+        setTimeout(() => {
+          if (DEBUG) console.log("[Redirect] Reindirizzamento alla pagina di ringraziamento");
+          window.location.href = "/ThanksYouPage";
+        }, 2000);
+      } catch (error) {
+        console.log("Errore nel invio del form:", error);
+        alert("Errore nel processo. Riprova più tardi.");
+        loader.classList.remove("fixed");
+        loader.classList.add("hidden");
+      }
+    });
+  }
+}
