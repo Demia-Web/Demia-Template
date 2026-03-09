@@ -1,11 +1,14 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import { initForm } from "./form";
+import { initHeader } from "./header";
+import { initHomePage } from "./home";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // 🌐 Debug globale per tutto il progetto
-window.swupDebug = false;
+window.swupDebug = true;
 
 // LENIS
 const lenis = new Lenis();
@@ -90,6 +93,13 @@ function initScripts() {
       });
     });
   }
+
+  // Init Components
+  initForm();
+  initHeader();
+
+  // Init Pages
+  initHomePage;
 }
 
 // ESECUZIONE: PRIMO LOAD + TRANSIZIONI SWUP

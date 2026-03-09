@@ -1,6 +1,3 @@
-const DEBUG = false;
-if (!DEBUG) console.log = () => {};
-
 export function initForm() {
   if (window.swupDebug) console.log("🔄 initForm()");
   const navbar = document.getElementById("contactForm");
