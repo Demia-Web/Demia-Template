@@ -7,8 +7,6 @@ import netlify from "@astrojs/netlify";
 
 import react from "@astrojs/react";
 
-import swup from "@swup/astro";
-
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -21,21 +19,5 @@ export default defineConfig({
 
   adapter: netlify(),
   output: "server",
-  integrations: [
-    react(),
-    swup({
-      theme: "false",
-      containers: ["main"],
-      cache: true,
-      preload: true,
-      accessibility: true,
-      morph: false,
-      parallel: false,
-      updateBodyClass: true,
-      updateHead: true,
-      reloadScripts: true,
-      loadOnIdle: true,
-      globalInstance: false,
-    }),
-  ],
+  integrations: [react()],
 });

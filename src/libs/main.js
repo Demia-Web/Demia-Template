@@ -4,6 +4,7 @@ import Lenis from "lenis";
 import { initForm } from "./form";
 import { initHeader } from "./header";
 import { initHomePage } from "./home";
+import { initBarba } from "./barba-setup";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,7 +30,7 @@ export const stopLenis = () => {
 
 const toggleLenis = () => (isLenisRunning ? stopLenis() : startLenis());
 
-function initScripts() {
+export function initAllPages() {
   const themeEl = document.querySelector("#theme-value");
   if (themeEl) {
     const newTheme = themeEl.dataset.theme;
@@ -99,18 +100,11 @@ function initScripts() {
   initHeader();
 
   // Init Pages
-  initHomePage;
+  initHomePage();
 }
 
-// ESECUZIONE: PRIMO LOAD + TRANSIZIONI SWUP
-document.addEventListener("DOMContentLoaded", initScripts);
-document.addEventListener("swup:page:view", initScripts);
+// Init iniziale
+initAllPages();
 
-document.addEventListener("swup:content:replace", () => {
-  window.scrollTo(0, 0);
-  if (window.swupDebug) console.log("scrollTo avviato");
-});
-
-document.addEventListener("swup:page:view", () => {
-  if (window.swupDebug) console.log("Triggerato -> page:view");
-});
+// Setup Barba
+initBarba();
