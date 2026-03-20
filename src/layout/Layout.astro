@@ -12,10 +12,15 @@ const { title, description, keyword, theme, dataPage } = Astro.props;
   <head>
     <BaseHead title={title} description={description} keyword={keyword} />
   </head>
-  <body id="body" class="relative" data-page={dataPage}>
-    <Header />
-    <Menu />
-    <slot />
-    <Footer />
+  <body id="body" class="relative">
+    <main data-barba="wrapper">
+      <div data-barba="container" data-barba-namespace={dataPage} data-page={dataPage}>
+        <Header />
+        <Menu />
+        <slot />
+        <Footer />
+        <script src="../libs/main.js"></script>
+      </div>
+    </main>
   </body>
 </html>
