@@ -11,6 +11,7 @@ const { title, description, keyword, theme, dataPage } = Astro.props;
 <html lang="it" id="html" data-theme={theme}>
   <head>
     <BaseHead title={title} description={description} keyword={keyword} />
+    <slot name="head" />
   </head>
   <body id="body" class="relative">
     <main data-barba="wrapper">
