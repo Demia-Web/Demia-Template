@@ -9,7 +9,11 @@
 
 @theme {
   /* Colori */
-  --color-azzurro: #3dbcc8;
+  --color-arancio: #FF6600;
+  --color-bianco: #FFF;
+  --color-nero: #000;
+  --color-neutral3: #E2E2E2;
+  --color-neutral2: #F5F5F5;
 
   /* Misure */
   --spacing-xxxl: clamp(100px, 13.021vw, 23.148vh); /* 250px */
