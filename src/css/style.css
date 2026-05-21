@@ -45,8 +45,7 @@
 }
 
 html {
-  overflow-x: hidden;
-  font-family: Montserrat;
+  font-family: var(--font-montserrat);
 }
 
 html[data-theme="white"] {
@@ -55,57 +54,62 @@ html[data-theme="white"] {
 
 @utility overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+  inset: 0;
+}
+
+@utility highlight {
+  font-size: clamp(64px, 9.375vw, 16.667vh);
+  line-height: clamp(64px, 9.375vw, 16.667vh);
+}
+
+@utility t-h1 {
+  font-size: clamp(44px, 5.208vw, 9.259vh);
+  line-height: clamp(48px, 5.417vw, 9.63vh);
+}
+
+@utility t-h2 {
+  font-size: clamp(36px, 4.063vw, 7.222vh);
+  line-height: clamp(40px, 4.271vw, 7.593vh);
+}
+
+@utility t-h3 {
+  font-size: clamp(24px, 2.5vw, 4.444vh);
+  line-height: clamp(28px, 2.708vw, 4.815vh);
+}
+
+@utility t-h4 {
+  font-size: clamp(20px, 1.875vw, 3.333vh);
+  line-height: clamp(24px, 2.083vw, 3.704vh);
+}
+
+@utility t-h5 {
+  font-size: clamp(20px, 1.25vw, 2.222vh);
+  line-height: clamp(24px, 1.458vw, 2.593vh);
+}
+
+@utility t-p {
+  font-size: clamp(16px, 0.833vw, 1.481vh);
+  line-height: clamp(20px, 1.042vw, 1.852vh);
+}
+
+@utility t-label {
+  font-size: clamp(20px, 1.042vw, 1.852vh);
+  line-height: clamp(20px, 1.042vw, 1.852vh);
+  letter-spacing: -0.3px;
+}
+
+@utility t-small {
+  font-size: clamp(12px, 0.625vw, 1.111vh);
+  line-height: clamp(16px, 0.833vw, 1.481vh);
 }
 
 @layer utilities {
-  .highlight {
-    font-size: clamp(64px, 9.375vw, 16.667vh);
-    line-height: clamp(64px, 9.375vw, 16.667vh);
-  }
-
-  .t-h1 {
-    font-size: clamp(44px, 5.208vw, 9.259vh);
-    line-height: clamp(48px, 5.417vw, 9.63vh);
-  }
-
-  .t-h2 {
-    font-size: clamp(36px, 4.063vw, 7.222vh);
-    line-height: clamp(40px, 4.271vw, 7.593vh);
-  }
-
-  .t-h3 {
-    font-size: clamp(24px, 2.5vw, 4.444vh);
-    line-height: clamp(28px, 2.708vw, 4.815vh);
-  }
-
-  .t-h4 {
-    font-size: clamp(20px, 1.875vw, 3.333vh);
-    line-height: clamp(24px, 2.083vw, 3.704vh);
-  }
-
-  .t-h5 {
-    font-size: clamp(20px, 1.25vw, 2.222vh);
-    line-height: clamp(24px, 1.458vw, 2.593vh);
-  }
-
   p,
-  .t-p {
-    font-size: clamp(16px, 0.833vw, 1.481vh);
-    line-height: clamp(20px, 1.042vw, 1.852vh);
-  }
-
-  .t-label {
-    font-size: clamp(20px, 1.042vw, 1.852vh);
-    line-height: clamp(20px, 1.042vw, 1.852vh);
-    letter-spacing: -0.3px;
-  }
-
-  .t-small {
-    font-size: clamp(12px, 0.625vw, 1.111vh);
-    line-height: clamp(16px, 0.833vw, 1.481vh);
+  a,
+  span,
+  ul,
+  li,
+  ol {
+    @apply t-p;
   }
 }

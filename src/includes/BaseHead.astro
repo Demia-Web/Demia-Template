@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import "../css/style.css";
 import "../css/button.css";
 const { title, description, keyword } = Astro.props;
@@ -6,6 +7,8 @@ const { title, description, keyword } = Astro.props;
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
+
+<Font cssVariable="--font-montserrat" preload />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

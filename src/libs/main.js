@@ -12,7 +12,12 @@ gsap.registerPlugin(ScrollTrigger);
 window.swupDebug = true;
 
 // LENIS
-const lenis = new Lenis();
+const lenis = new Lenis({
+  autoRaf: false,
+  smoothWheel: true,
+  touchMultiplier: 1.5,
+  lerp: 0.1,
+});
 let isLenisRunning = true;
 
 gsap.ticker.lagSmoothing(0);
@@ -27,8 +32,6 @@ export const stopLenis = () => {
   isLenisRunning = false;
   lenis.stop();
 };
-
-const toggleLenis = () => (isLenisRunning ? stopLenis() : startLenis());
 
 export function initAllPages() {
   const themeEl = document.querySelector("#theme-value");
@@ -52,46 +55,11 @@ export function initAllPages() {
 
         const offsetTop = target.getBoundingClientRect().top + lenis.scroll;
         lenis.scrollTo(offsetTop, {
-          duration: 0.8,
-          easing: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+          easing: (x) => (x < 0.5 ? 8 * x * x * x * x : 1 - Math.pow(-2 * x + 2, 4) / 2),
+          duration: 1.2,
+          offset: -36,
         });
       };
-    });
-  }
-
-  // Animazione Faq
-  if (document.querySelector(".accordion-item")) {
-    const accordions = document.querySelectorAll(".accordion-item");
-    const animationDuration = 0.5;
-
-    accordions.forEach((accordion) => {
-      const header = accordion.querySelector(".accordion-header");
-      const body = accordion.querySelector(".accordion-body");
-      const p = accordion.querySelector(".accordion-text");
-      const arrow = accordion.querySelector(".arrow");
-
-      gsap.set(body, { height: 0 });
-
-      accordion.addEventListener("click", () => {
-        const isOpen = body.classList.contains("active");
-
-        if (isOpen) {
-          gsap.to(body, {
-            height: 0,
-            duration: animationDuration,
-            ease: "power4.inOut",
-          });
-          accordion.classList.remove("active");
-          body.classList.remove("active");
-          arrow.classList.remove("active");
-        } else {
-          const fullHeight = `calc(${body.scrollHeight}px)`;
-          gsap.fromTo(body, { height: 0 }, { height: fullHeight, duration: animationDuration, ease: "power4.inOut" });
-          accordion.classList.add("active");
-          body.classList.add("active");
-          arrow.classList.add("active");
-        }
-      });
     });
   }
 
