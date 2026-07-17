@@ -3,6 +3,7 @@ import BaseHead from "../includes/BaseHead.astro";
 import Header from "../includes/Header.astro";
 import Footer from "../includes/Footer.astro";
 import Menu from "../includes/Menu.astro";
+import Grid from "@/components/dev/grid.astro";
 
 const { title, description, keyword, theme = "light", dataPage } = Astro.props;
 ---
@@ -14,6 +15,7 @@ const { title, description, keyword, theme = "light", dataPage } = Astro.props;
     <slot name="head" />
   </head>
   <body id="body" class="relative">
+    <Grid />
     <main data-barba="wrapper">
       <div data-barba="container" data-barba-namespace={dataPage} data-page={dataPage}>
         <Header />

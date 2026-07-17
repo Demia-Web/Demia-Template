@@ -30,7 +30,7 @@ export async function fetchAPI(endpoint, locale) {
 
   const response = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${import.meta.env.PUBLIC_API_TOKEN}`,
+      Authorization: `users API-Key ${import.meta.env.PUBLIC_API_TOKEN}`,
     },
   });
 

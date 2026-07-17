@@ -5,6 +5,7 @@ import { initForm } from "./form";
 import { initHeader } from "./header";
 import { initHomePage } from "./home";
 import { initBarba } from "./barba-setup";
+import { initAnimatedGrid } from "./components";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,6 +33,25 @@ export const stopLenis = () => {
   isLenisRunning = false;
   lenis.stop();
 };
+
+function refreshOnMediaLoad() {
+  let queued = false;
+  const queueRefresh = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      queued = false;
+      ScrollTrigger.refresh();
+    });
+  };
+
+  document.querySelectorAll("img").forEach((img) => {
+    if (!img.complete) img.addEventListener("load", queueRefresh, { once: true });
+  });
+  document.querySelectorAll("video").forEach((video) => {
+    if (video.readyState < 1) video.addEventListener("loadedmetadata", queueRefresh, { once: true });
+  });
+}
 
 export function initAllPages() {
   const themeEl = document.querySelector("#theme-value");
@@ -66,6 +86,8 @@ export function initAllPages() {
   // Init Components
   initForm();
   initHeader();
+  initAnimatedGrid();
+  refreshOnMediaLoad();
 
   // Init Pages
   initHomePage();
